@@ -115,3 +115,7 @@ class CloudAdminUsers(AtlassianRestAPI):
     def get_profile(self, account_id):
         url = self.resource_url(f"{account_id}/manage/profile")
         return self.get(url)
+
+    def update_profile(self, account_id, data):
+        url = self.resource_url(f"{account_id}/manage/profile")
+        return self.patch(url, data)
