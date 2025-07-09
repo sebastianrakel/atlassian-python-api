@@ -79,3 +79,55 @@ class CustomerServiceManagement(AtlassianRestAPI):
         
         url = self.resource_url(f"organization/{org_id}/details?fieldName={field_name}")
         return self.put(url, data)
+
+    def get_customer_detail_fields(self):
+        """
+        Returns a list of your customer (based on your API key).
+        :return:
+        """
+        url = self.resource_url("customer/details")
+        return self.get(url)
+
+    def create_customer_detail_fields(self, name, type_name, options=None):
+        """
+        :param name:
+        :param type_name:
+        :param options:
+        :return:
+        """
+        data = {
+            'name': name,
+            'type': {
+                'name': type_name,
+                'options': options
+            }
+        }
+        
+        url = self.resource_url(f"customer/details", data)
+        return self.post(url, data)
+
+    def get_customer(self, account_id):
+        """
+        Returns information about a single customer by account id
+        :param account_id:
+        :return:
+        """
+        
+        url = self.resource_url(f"customer/{account_id}")
+        return self.get(url)
+
+    def set_customer_detail(self, account_id, field_name, values):
+        """
+        Set customer detail field
+        :param account_id:
+        :param field_name:
+        :param values:
+        :return:
+        """
+
+        data = {
+            "values": values
+        }
+        
+        url = self.resource_url(f"customer/{account_id}/details?fieldName={field_name}")
+        return self.put(url, data)
